@@ -1,0 +1,9 @@
+AI Tool Used: ChatGPT
+
+Examples of AI Assistance:
+ Helped write the CREATE TABLE SQL statement
+ Helped implement INSERT, SELECT, UPDATE, and DELETE queries
+ Helped structure the CLI menu loop
+ Helped troubleshoot PowerShell command issues when running the Python file
+
+
