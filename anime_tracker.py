@@ -38,8 +38,34 @@ def add_anime():
     print("Anime added successfully!")
 
 
-# Test the function once
-add_anime()
+def view_all_anime():
+    cur.execute("SELECT * FROM anime")
+    rows = cur.fetchall()
 
-# Close connection
+    if len(rows) == 0:
+        print("No anime found.")
+    else:
+        print("\n--- All Anime ---")
+        for row in rows:
+            print(row)
+
+
+def search_anime():
+    search_title = input("Enter title to search for: ")
+
+    cur.execute("SELECT * FROM anime WHERE title LIKE ?", ('%' + search_title + '%',))
+    rows = cur.fetchall()
+
+    if len(rows) == 0:
+        print("No matching anime found.")
+    else:
+        print("\n--- Search Results ---")
+        for row in rows:
+            print(row)
+
+
+# Test Step 5
+view_all_anime()
+search_anime()
+
 con.close()
