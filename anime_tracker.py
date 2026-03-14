@@ -118,11 +118,34 @@ def delete_anime():
         print("Delete canceled.")
 
 
-# Test Step 6
-view_all_anime()
-update_anime()
-view_all_anime()
-delete_anime()
-view_all_anime()
+def main():
+    while True:
+        print("\n--- Anime Tracker ---")
+        print("1. Add anime")
+        print("2. View all anime")
+        print("3. Search anime by title")
+        print("4. Update anime")
+        print("5. Delete anime")
+        print("6. Quit")
 
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            add_anime()
+        elif choice == "2":
+            view_all_anime()
+        elif choice == "3":
+            search_anime()
+        elif choice == "4":
+            update_anime()
+        elif choice == "5":
+            delete_anime()
+        elif choice == "6":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+main()
 con.close()
