@@ -64,8 +64,65 @@ def search_anime():
             print(row)
 
 
-# Test Step 5
+def update_anime():
+    anime_id = int(input("Enter the id of the anime you want to update: "))
+
+    cur.execute("SELECT * FROM anime WHERE id = ?", (anime_id,))
+    anime = cur.fetchone()
+
+    if anime is None:
+        print("Anime not found.")
+        return
+
+    print("\nCurrent record:")
+    print(anime)
+
+    new_title = input("Enter new title: ")
+    new_genre = input("Enter new genre: ")
+    new_rating = int(input("Enter new rating: "))
+    new_status = input("Enter new status: ")
+    new_episodes_watched = int(input("Enter new episodes watched: "))
+    new_date_started = input("Enter new date started: ")
+    new_notes = input("Enter new notes: ")
+
+    cur.execute("""
+        UPDATE anime
+        SET title = ?, genre = ?, rating = ?, status = ?, episodes_watched = ?, date_started = ?, notes = ?
+        WHERE id = ?
+    """, (new_title, new_genre, new_rating, new_status, new_episodes_watched, new_date_started, new_notes, anime_id))
+
+    con.commit()
+    print("Anime updated successfully!")
+
+
+def delete_anime():
+    anime_id = int(input("Enter the id of the anime you want to delete: "))
+
+    cur.execute("SELECT * FROM anime WHERE id = ?", (anime_id,))
+    anime = cur.fetchone()
+
+    if anime is None:
+        print("Anime not found.")
+        return
+
+    print("\nRecord to be deleted:")
+    print(anime)
+
+    confirm = input("Are you sure you want to delete this anime? (yes/no): ")
+
+    if confirm.lower() == "yes":
+        cur.execute("DELETE FROM anime WHERE id = ?", (anime_id,))
+        con.commit()
+        print("Anime deleted successfully!")
+    else:
+        print("Delete canceled.")
+
+
+# Test Step 6
 view_all_anime()
-search_anime()
+update_anime()
+view_all_anime()
+delete_anime()
+view_all_anime()
 
 con.close()
